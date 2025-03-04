@@ -7,7 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-hedgehog-sleep/node_modules
+node_modules
 dist
 dist-ssr
 *.local
