@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "dev": "hedgehog-sleep/node_modules/.bin/vite",
+    "build": "hedgehog-sleep/node_modules/.bin/tsc -b && vite build",
+    "lint": "hedgehog-sleep/node_modules/.bin/eslint .",
+    "preview": "hedgehog-sleep/node_modules/.bin/vite preview"
   },
   "dependencies": {
     "@radix-ui/themes": "^3.2.1",
