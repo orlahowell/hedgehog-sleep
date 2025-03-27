@@ -140,17 +140,15 @@ export const Calculator = () => {
                 <Heading>{startTime.toLocaleTimeString('da-DK', { hour: '2-digit', minute: '2-digit' })}</Heading>
                 <div className={styles.timeButtons}>
                     <div className={styles.hours}>
-                        <Button size="1" variant={getSelectedButtonVariant(hourIsSelected(6))} onClick={() => setStartHours(6)}>06</Button>
-                        <Button size="1" variant={getSelectedButtonVariant(hourIsSelected(7))} onClick={() => setStartHours(7)}>07</Button>
-                        <Button size="1" variant={getSelectedButtonVariant(hourIsSelected(8))} onClick={() => setStartHours(8)}>08</Button>
-                        <Button size="1" variant={getSelectedButtonVariant(hourIsSelected(9))} onClick={() => setStartHours(9)}>09</Button>
+                        {[6, 7, 8, 9].map(hour => 
+                            <Button size="1" variant={getSelectedButtonVariant(hourIsSelected(hour))} onClick={() => setStartHours(hour)}>{String(hour).padStart(2, '0')}</Button>
+                        )}
                     </div>
                     <Heading>:</Heading>
                     <div className={styles.minutes}>
-                        <Button size="1" variant={getSelectedButtonVariant(minuteIsSelected(0))} onClick={() => setStartMinutes(0)}>00</Button>
-                        <Button size="1" variant={getSelectedButtonVariant(minuteIsSelected(15))} onClick={() => setStartMinutes(15)}>15</Button>
-                        <Button size="1" variant={getSelectedButtonVariant(minuteIsSelected(30))} onClick={() => setStartMinutes(30)}>30</Button>
-                        <Button size="1" variant={getSelectedButtonVariant(minuteIsSelected(45))} onClick={() => setStartMinutes(45)}>45</Button>
+                        {[0, 15, 30, 45].map(minute => 
+                            <Button size="1" variant={getSelectedButtonVariant(minuteIsSelected(minute))} onClick={() => setStartMinutes(minute)}>{String(minute).padStart(2, '0')}</Button>
+                        )}
                     </div>
                 </div>
 
