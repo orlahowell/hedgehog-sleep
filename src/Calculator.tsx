@@ -1,5 +1,5 @@
 import styles from './Calculator.module.css'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {Button, Heading, Text} from "@radix-ui/themes";
 import {
     GiBed,
@@ -58,8 +58,23 @@ const activities = {
 type ActivityId = keyof typeof activities
 
 export const Calculator = () => {
-    const [selectedActivities, setSelectedActivities] = useState<ActivityId[]>(['coffee', 'cycleToWork', 'getDressed'])
-    const [startTime, setStartTime] = useState(new Date('04/03/2025, 08:00:00'))
+    const [selectedActivities, setSelectedActivities] = useState<ActivityId[]>(() => {
+        const saved = localStorage.getItem('selectedActivities');
+        return saved ? JSON.parse(saved) : ['coffee', 'cycleToWork', 'getDressed'];
+    });
+    
+    const [startTime, setStartTime] = useState(() => {
+        const saved = localStorage.getItem('startTime');
+        return saved ? new Date(saved) : new Date('04/03/2025, 08:00:00');
+    });
+
+    useEffect(() => {
+        localStorage.setItem('selectedActivities', JSON.stringify(selectedActivities));
+    }, [selectedActivities]);
+
+    useEffect(() => {
+        localStorage.setItem('startTime', startTime.toISOString());
+    }, [startTime]);
 
     const setStartMinutes = (minutes: number) => {
         const newDate = new Date(startTime)
@@ -128,6 +143,7 @@ export const Calculator = () => {
                         <Button size="1" variant={getSelectedButtonVariant(hourIsSelected(6))} onClick={() => setStartHours(6)}>06</Button>
                         <Button size="1" variant={getSelectedButtonVariant(hourIsSelected(7))} onClick={() => setStartHours(7)}>07</Button>
                         <Button size="1" variant={getSelectedButtonVariant(hourIsSelected(8))} onClick={() => setStartHours(8)}>08</Button>
+                        <Button size="1" variant={getSelectedButtonVariant(hourIsSelected(9))} onClick={() => setStartHours(9)}>09</Button>
                     </div>
                     <Heading>:</Heading>
                     <div className={styles.minutes}>
